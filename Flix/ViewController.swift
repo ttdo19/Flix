@@ -21,7 +21,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         movieTableView.delegate = self
         movieTableView.dataSource = self
         getAPIData()
-        movieTableView.rowHeight = 150
+//        movieTableView.rowHeight = 175
     }
     
     func getAPIData() {
