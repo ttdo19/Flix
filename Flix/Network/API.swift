@@ -9,7 +9,7 @@ import Foundation
 
 struct API {
     
-    static func getMovies(completion: @escaping ([[String: Any]]?) -> Void) {
+    static func getMovies(completion: @escaping ([Movie]?) -> Void) {
         
         let url = URL(string: "https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed")!
         
@@ -22,7 +22,14 @@ struct API {
                 print(error.localizedDescription)
             } else if let data = data {
                 let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
-                let movies = dataDictionary["results"] as! [[String: Any]]
+                let dictionaries = dataDictionary["results"] as! [[String: Any]]
+                
+                var movies: [Movie] = []
+                
+                for dictionary in dictionaries {
+                    let movie = Movie.init(dict: dictionary)
+                    movies.append(movie)
+                }
                 
                 return completion(movies)
             }

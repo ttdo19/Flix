@@ -13,7 +13,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     @IBOutlet weak var movieTableView: UITableView!
     
-    var moviesArray: [[String: Any?]] = []
+    var moviesArray: [Movie] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +29,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             guard let movies = movies else {
                 return
             }
-            print(movies)
             self.moviesArray = movies
             self.movieTableView.reloadData()
         }
@@ -45,15 +44,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         let movie = moviesArray[indexPath.row]
         
-        cell.title.text = movie["title"] as? String ?? ""
+        cell.m = movie
         
-        cell.plot.text = movie["overview"] as? String ?? ""
-        
-        if let imageUrlString = movie["poster_path"] as? String {
-            let baseUrl = "https://image.tmdb.org/t/p/w185"
-            let imageUrl = URL(string: baseUrl + imageUrlString)
-            cell.movieImage.af.setImage(withURL: imageUrl!)
-        }
         return cell
     }
 }
