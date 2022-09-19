@@ -8,20 +8,34 @@
 import UIKit
 import AlamofireImage
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchResultsUpdating {
     
     @IBOutlet weak var movieTableView: UITableView!
     
     var moviesArray: [Movie] = []
+    
+    var filteredMovies: [Movie]!
+    
+    var searchController: UISearchController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         movieTableView.delegate = self
         movieTableView.dataSource = self
+        
         getAPIData()
-//        movieTableView.rowHeight = 175
+        filteredMovies = moviesArray
+        
+        searchController = UISearchController(searchResultsController: nil)
+        searchController.searchResultsUpdater = self
+        
+        searchController.dimsBackgroundDuringPresentation = false
+        
+        searchController.searchBar.sizeToFit()
+        movieTableView.tableHeaderView = searchController.searchBar
+        
+        definesPresentationContext = true
     }
     
     func getAPIData() {
@@ -30,19 +44,20 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 return
             }
             self.moviesArray = movies
+            self.filteredMovies = movies
             self.movieTableView.reloadData()
         }
     }
 
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return moviesArray.count
+        return filteredMovies.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = movieTableView.dequeueReusableCell(withIdentifier: "MovieTableViewCell") as! MovieTableViewCell
         
-        let movie = moviesArray[indexPath.row]
+        let movie = filteredMovies[indexPath.row]
         
         cell.m = movie
         
@@ -52,10 +67,27 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let cell = sender as! UITableViewCell
         if let indexPath = movieTableView.indexPath(for: cell) {
-            let m = moviesArray[indexPath.row]
+            let m = filteredMovies[indexPath.row]
             let detailViewController = segue.destination as! MovieDetailsViewController
             detailViewController.movie = m
+            movieTableView.deselectRow(at: indexPath, animated: true)
+        }
+        
+    }
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        if let searchText = searchController.searchBar.text {
+            if searchText.isEmpty {
+                filteredMovies = moviesArray
+            } else {
+                filteredMovies = moviesArray.filter { movie in
+                    return movie.name.contains(searchText)
+                }
+            }
+            movieTableView.reloadData()
         }
     }
+    
+
 }
 

@@ -139,7 +139,7 @@
                                 <color key="shadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Synopsis" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mvu-Gr-hmC">
-                                <rect key="frame" x="20" y="547" width="374" height="20.5"/>
+                                <rect key="frame" x="20" y="522" width="374" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -155,7 +155,7 @@
                         <viewLayoutGuide key="safeArea" id="mZL-qI-2Gf"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="mvu-Gr-hmC" firstAttribute="top" secondItem="NX0-93-wv2" secondAttribute="bottom" constant="75" id="2qT-Ku-MUf"/>
+                            <constraint firstItem="mvu-Gr-hmC" firstAttribute="top" secondItem="NX0-93-wv2" secondAttribute="bottom" constant="50" id="2qT-Ku-MUf"/>
                             <constraint firstItem="m5s-WN-Iwz" firstAttribute="top" secondItem="NX0-93-wv2" secondAttribute="bottom" constant="10" id="8KH-gS-1kl"/>
                             <constraint firstItem="mZL-qI-2Gf" firstAttribute="bottom" secondItem="gZT-Oz-q9g" secondAttribute="bottom" constant="10" id="Ack-bI-UAD"/>
                             <constraint firstItem="mZL-qI-2Gf" firstAttribute="trailing" secondItem="mvu-Gr-hmC" secondAttribute="trailing" constant="20" id="BOo-o0-51d"/>
