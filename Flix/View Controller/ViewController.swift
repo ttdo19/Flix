@@ -48,5 +48,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         return cell
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let cell = sender as! UITableViewCell
+        if let indexPath = movieTableView.indexPath(for: cell) {
+            let m = moviesArray[indexPath.row]
+            let detailViewController = segue.destination as! MovieDetailsViewController
+            detailViewController.movie = m
+        }
+    }
 }
 
