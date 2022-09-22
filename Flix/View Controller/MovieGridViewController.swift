@@ -22,12 +22,13 @@ class MovieGridViewController: UIViewController, UICollectionViewDelegate, UICol
         
         let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
         
-        layout.minimumLineSpacing = 4
+        
         layout.minimumInteritemSpacing = 4
         
         // Tp get 3 posters per row, the height of the poster = width * 1.5
         let width = (view.frame.self.width - layout.minimumInteritemSpacing * 2) / 3
         layout.itemSize = CGSize(width: width, height: width * 3 / 2)
+        layout.minimumLineSpacing = -12
         // Do any additional setup after loading the view.
     }
     
@@ -53,5 +54,13 @@ class MovieGridViewController: UIViewController, UICollectionViewDelegate, UICol
         return cell
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let cell = sender as! UICollectionViewCell
+        let indexPath = collectionView.indexPath(for: cell)!
+        let movie = moviesArray[indexPath.row]
+        
+        let detailsViewController = segue.destination as! MovieGridDetailViewController
+        detailsViewController.movie = movie
+    }
 
 }
