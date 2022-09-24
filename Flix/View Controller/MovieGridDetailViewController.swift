@@ -28,14 +28,25 @@ class MovieGridDetailViewController: UIViewController {
         posterView.af.setImage(withURL: movie.imageURL!)
         posterView.layer.cornerRadius = 10
         posterView.clipsToBounds = false
-
+        
         posterView.layer.shadowColor = UIColor.black.cgColor
         posterView.layer.shadowOpacity = 1
         posterView.layer.shadowRadius = 20
         
         backdropView.af.setImage(withURL: movie.backdropURL!)
         // Do any additional setup after loading the view.
+        let tapGR = UITapGestureRecognizer(target: self, action: #selector(self.imageTapped))
+        posterView.addGestureRecognizer(tapGR)
+        posterView.isUserInteractionEnabled = true
     }
+    
+    @objc func imageTapped(sender: UITapGestureRecognizer) {
+                    if sender.state == .ended {
+                            print("UIImageView tapped")
+                    }
+            }
+    
+   
     
 
     /*

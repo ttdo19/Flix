@@ -18,7 +18,7 @@ class Movie {
     var popularity: Any
     var imageURL: URL?
     var backdropURL: URL?
-    
+    var movieID: Int
     
     init(dict: [String: Any]) {
         name = dict["title"] as! String
@@ -28,6 +28,7 @@ class Movie {
         vote_count = dict["vote_count"] as! Int
         rating = dict["vote_average"] as! Double
         popularity = dict["popularity"]!
+        movieID = dict["id"] as! Int
         if let imageUrlString = dict["poster_path"] as? String {
             imageURL = URL(string: "https://image.tmdb.org/t/p/w185" + imageUrlString)
         }
