@@ -12,6 +12,8 @@ class MovieGridDetailViewController: UIViewController {
 
     var movie: Movie!
     
+    var keysArray: [String]!
+    
     @IBOutlet weak var synopsis: UILabel!
     @IBOutlet weak var release_date: UILabel!
     
@@ -21,6 +23,7 @@ class MovieGridDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        getAPIData()
         
         name.text = movie.name
         synopsis.text = movie.synopsis
@@ -35,17 +38,24 @@ class MovieGridDetailViewController: UIViewController {
         
         backdropView.af.setImage(withURL: movie.backdropURL!)
         // Do any additional setup after loading the view.
-        let tapGR = UITapGestureRecognizer(target: self, action: #selector(self.imageTapped))
-        posterView.addGestureRecognizer(tapGR)
         posterView.isUserInteractionEnabled = true
     }
     
-    @objc func imageTapped(sender: UITapGestureRecognizer) {
-                    if sender.state == .ended {
-                            print("UIImageView tapped")
-                    }
+    func getAPIData() {
+        API.getTrailerKey(movieID: movie.movieID) { (key) in
+            guard let key = key else {
+                return
             }
+            self.keysArray = key
+        }
+    }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let tap = sender as! UITapGestureRecognizer
+        let key = keysArray.first
+        let detailViewController = segue.destination as! MovieTrailerViewController
+        detailViewController.trailerKey = key
+    }
    
     
 

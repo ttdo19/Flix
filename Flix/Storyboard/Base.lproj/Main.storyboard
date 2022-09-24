@@ -97,10 +97,14 @@
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1Tp-et-Jb8">
                                 <rect key="frame" x="20" y="292" width="120" height="180"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="180" id="Itz-Cb-XfV"/>
                                     <constraint firstAttribute="width" constant="120" id="LCN-Wd-SN0"/>
                                 </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="Uo5-j5-Ylp" appends="YES" id="5Kv-Qx-buh"/>
+                                </connections>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IzK-2f-j17">
                                 <rect key="frame" x="160" y="412" width="51" height="45"/>
@@ -151,23 +155,42 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pEM-q8-e5F" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="Uo5-j5-Ylp">
+                    <connections>
+                        <segue destination="FDt-RQ-0Gs" kind="presentation" identifier="MovieTrailer" id="jTm-Mm-EJ7"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2127.536231884058" y="1206.6964285714284"/>
         </scene>
-        <!--View Controller-->
+        <!--Movie Trailer View Controller-->
         <scene sceneID="1sK-un-o61">
             <objects>
-                <viewController id="FDt-RQ-0Gs" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MovieTrailerViewController" id="FDt-RQ-0Gs" customClass="MovieTrailerViewController" customModule="Flix" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="jlc-pt-50n">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="838"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9lb-M6-did">
+                                <rect key="frame" x="0.0" y="48" width="414" height="756"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="91W-mu-BMX"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <connections>
+                        <outlet property="webView" destination="9lb-M6-did" id="qjT-1n-fMO"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IaF-Xf-b6i" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2128" y="1900"/>
+            <point key="canvasLocation" x="2127.536231884058" y="1899.7767857142856"/>
         </scene>
         <!--ViewController-->
         <scene sceneID="tne-QT-ifu">
